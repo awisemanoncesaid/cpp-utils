@@ -9,8 +9,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(DLLoader INTERFACE)
 
 # Specify include directories for the library
-target_include_directories(DLLoader INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(DLLoader INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include/CppUtils/DLLoader>
+)
 
 if (UNIX)
     target_link_libraries(DLLoader INTERFACE -ldl)
 endif()
+
+# --- Installation ---
+
+install(TARGETS DLLoader
+    EXPORT CppUtilsTargets
+)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
+    DESTINATION include/CppUtils/DLLoader
+    FILES_MATCHING PATTERN "*.hpp"
+)

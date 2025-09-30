@@ -8,4 +8,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Create the library
 add_library(Math INTERFACE)
 
-target_include_directories(Math INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(Math INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include/CppUtils/Math>
+)
+
+# --- Installation ---
+
+install(TARGETS Math
+    EXPORT CppUtilsTargets
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
+    DESTINATION include/CppUtils/Math
+    FILES_MATCHING PATTERN "*.hpp"
+)

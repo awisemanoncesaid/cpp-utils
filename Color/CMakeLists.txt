@@ -9,4 +9,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(Color INTERFACE)
 
 # Specify include directories for the library
-target_include_directories(Color INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(Color INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include/CppUtils/Color>
+)
+
+# --- Installation ---
+
+install(TARGETS Color
+    EXPORT CppUtilsTargets
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
+    DESTINATION include/CppUtils/Color
+    FILES_MATCHING PATTERN "*.hpp"
+)
