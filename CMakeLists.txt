@@ -11,6 +11,11 @@ add_subdirectory(Signal)
 add_library(cpputils_math INTERFACE)
 add_library(cpputils::Math ALIAS cpputils_math)
 
+target_include_directories(cpputils_math INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Math/include>
+    $<INSTALL_INTERFACE:include/CppUtils/Math>
+)
+
 # --- Install ---
 
 # Export all targets for installation
