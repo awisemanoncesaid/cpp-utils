@@ -8,13 +8,8 @@ add_subdirectory(Color)
 add_subdirectory(DLLoader)
 add_subdirectory(Signal)
 
-add_library(CppUtils INTERFACE)
-target_link_libraries(CppUtils INTERFACE
-    CppUtils::Math
-    CppUtils::Color
-    CppUtils::DLLoader
-    CppUtils::Signal
-)
+add_library(cpputils_math INTERFACE)
+add_library(cpputils::Math ALIAS cpputils_math)
 
 # --- Install ---
 
